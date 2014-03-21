@@ -1,5 +1,5 @@
 var viewModel = {};
-var masterList = new Array();
+var fb = new Firebase("https://pray.firebaseio.com/");
 
 $(function() {
   app.onDeviceReady();
@@ -25,53 +25,40 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
     
-        app.initForm();
+        // app.initForm();
+        app.CreateViewModel();
+        ko.applyBindings(viewModel);
 
-        /******** Setting Prayer List ********/    
-        $.ajax({
-            url: "https://api.mongolab.com/api/1/databases/prayerrequests/collections/prayers?apiKey=b_xGNRQ8Z1eJvZcBB1OyqrPRmCEoH_JK",
-            type: "GET",
-            contentType: "application/json",
-            success: function (data) {
-                
-                /****** Draw prayer list ******/
-                app.CreateViewModel(data);
-                ko.applyBindings(viewModel);
-                $('.prayer_list').show();
-                masterList = data;
-            }
+        fb.limit(10).on("child_added", function(data) {
+            var prayer = data.val();
+            if(prayer != null) { 
+                app.onSuccess(prayer.name, prayer.prayer, prayer.date, prayer.type);
+            }       
         });
+
+        $('.prayer_list').show();
     },
 
     /********* Constructors ***********/
-    CreateViewModel: function(data) {
+    CreateViewModel: function() {
         viewModel.prayers = ko.observableArray();
-                
-        for(var i = 0; i < data.length; i++)
-        {
-            viewModel.prayers.push(new app.CreatePrayer(data[i].name, data[i].prayer, data[i].date, data[i].type));
-        }
-                
+
         viewModel.postForm = function () 
         {
+            $(this).attr('disabled', 'disabled');
+
             var name = $("#name").val();
             var prayer = $("#request").val();
             var type = $("#type").val();
             var date = app.getCurrentDate();
 
-            $.ajax( { url: "https://api.mongolab.com/api/1/databases/prayerrequests/collections/prayers?apiKey=b_xGNRQ8Z1eJvZcBB1OyqrPRmCEoH_JK",
-              data: JSON.stringify( { "name" : name, "prayer" : prayer, "date" :  date, "type" : type } ),
-              type: "POST",
-              contentType: "application/json",
-              success: function() { app.onSuccess(name, prayer, date, type); }
-            });
+            fb.push({ "name" : name, "prayer" : prayer, "date" :  date, "type" : type });
         }
     },
 
     onSuccess: function(name, prayer, date, type) {
         var newprayer = new app.CreatePrayer(name, prayer, date, type);
         viewModel.prayers.push(newprayer);
-        masterList.push(newprayer);
         app.clearForm();
     },
 
@@ -100,13 +87,6 @@ var app = {
 
         $('#prayer_form').each(function(){
             this.reset();
-        });
-    },
-
-    initForm: function() {
-        $('input[type=submit]').click(function() {
-            $(this).attr('disabled', 'disabled');
-            $(this).parents('form').submit()
         });
     }
 };
