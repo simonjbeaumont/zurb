@@ -50,6 +50,16 @@ body {
   position: relative;
   cursor: default; }
 
+/***********************   CUSTOM   *********************************/
+.banner {
+  color: white;
+}
+
+.radios label {
+  display: inline;
+}
+/*********************** END CUSTOM *********************************/
+
 a:hover {
   cursor: pointer; }
 

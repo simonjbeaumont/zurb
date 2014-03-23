@@ -3,80 +3,94 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>C3 Young Adults</title>
+
     <link rel="stylesheet" href="css/foundation.css" />
+      <!-- Social icon fonts -->
+    <link rel="stylesheet" href="css/social_foundicons.css" />
+    <link rel="stylesheet" href="css/general_enclosed_foundicons.css" />
+    <link rel="stylesheet" href="css/general_foundicons.css" />
+    <!-- Google fonts -->
+    <link rel="stylesheet" href="css/fonts.css" />
+
+    <!-- Included CSS Files -->
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+
     <script src="js/vendor/modernizr.js"></script>
   </head>
   <body>
-    
-    <div class="row">
-      <div class="large-12 columns">
-        <h1>C3 YA</h1>
-      </div>
-    </div>
-    
-    <div class="row">
-      <div class="large-8 medium-8 columns">
-        <h5>Prayer requests and praise reports</h5>
-        <!-- Grid Example -->
-        <div class="row prayer_list" data-bind="foreach: prayers" style="display:none;">
-          <div class="large-12 columns">
-            <div class="callout panel">
-              <p>
-                <span data-bind="text: type"></span>
-                <strong data-bind="text: name"></strong>
-                <span data-bind="text: prayer"></span> on <span class="d" data-bind="text: date"></span>
-              </p>
-            </div>
-          </div>
-        </div>
-        
-        <hr />
-                
-        <h5>Let us know how we can be praying for you...</h5>
-        <form data-bind="submit: postForm" id="prayer_form">
-           <div class="row">
-            <div class="large-12 columns">
-              <label></label>
-              <select id="type" name="type">
-                <option value="praise">Priase</option>
-                <option value="request">Request</option>
-              </select>
-            </div>
-          </div>
-				  <div class="row">
-				    <div class="large-12 columns">
-				      <label>Name</label>
-				      <input id="name" name="name" type="text" placeholder="optional" />
-				    </div>
-				  </div>
-				  <div class="row">
-				    <div class="large-12 columns">
-				      <label></label>
-				      <textarea id="request" placeholder="Tell what we can be praising God for or what we can pray for"></textarea>
-				    </div>
-				  </div>
-          <input class="small round button" id="submit" type="submit" value="Submit">
-				</form>
-      </div>     
 
-      <div class="large-4 medium-4 columns">         
-				<div class="panel">
-        	<h5>Not sure what we could put here?</h5>
-        	<p>Plug some upcoming events</p>
-          <p>Blogs or something?</p>
-        	<a href="http://foundation.zurb.com/docs/" class="small button">Go to Foundation Docs</a>          
-        </div>
+    <div class="contain-to-grid sticky" data-options="sticky_on: large">
+      <nav class="top-bar" data-topbar>
+        <h3 class="banner">C3 Young Adults</h3>
+      </nav>
+    </div>
+
+    <div class="row">
+      <div class="small-7 columns">
+          <hr />
+          <div id="prayers" class="row prayer_list" data-bind="foreach: prayers" style="display:none;">
+              <div class="callout panel">
+                  <span data-bind="css: type " data-bind="text: type"></span>
+                  <strong data-bind="text: name"></strong><span style="float: right;" data-bind="text: date"></span>
+                  <hr />
+                  <span data-bind="text: prayer"></span>
+              </div>
+          </div>
+          <hr />
+
+          <h5>How we can be praying for you?</h5>
+            <form data-bind="submit: postForm" id="prayer_form" class="custom" data-abide>
+              <div class="row">
+                <div class="large-12 columns radios">
+                  <label for="type_1">
+                    <input name="type" type="radio" id="type_1" value="social foundicon-thumb-up" checked>
+                    <span class="custom radio"></span> Praise
+                  </label>
+                  <label for="type_2">
+                    <input name="type" type="radio" id="type_2" value="general foundicon-inbox">
+                    <span class="custom radio"></span> Request
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="large-12 columns">
+                  <label>Name</label>
+                  <input id="name" name="name" type="text" placeholder="optional" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="large-12 columns">
+                  <!--<textarea id="request" required placeholder="Tell what we can be praising God for or what we can pray for"></textarea>
+                  <small class="error">Please enter message</small>-->
+                   <div class="text-field"> 
+                    <label>Your Prayer <small>required</small> 
+                     </label> 
+                     <textarea id="request" required placeholder="Tell what we can be praising God for or what we can pray for"></textarea>
+                    <small class="error">Ooops, we didn't get that...</small>
+                </div>
+              </div>
+              <input class="small round button" id="submit" type="submit" value="Submit">
+            </form>
       </div>
     </div>
     
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
+    <script src="js/jquery.js"></script>
     <script type="text/javascript" src="js/knockout.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-    <script>
-      app.initialize();
-    </script>
+    <script src="js/foundation/foundation.js"></script>
+    <script src="js/foundation/foundation.topbar.js"></script>
+    <script src="js/foundation/foundation.abide.js"></script>
+    <!-- Other JS plugins can be included here -->
+
+  <script>
+    $(document).foundation();
+    app.initialize();
+  </script>
   </body>
 </html>

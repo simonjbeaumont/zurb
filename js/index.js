@@ -29,7 +29,7 @@ var app = {
         app.CreateViewModel();
         ko.applyBindings(viewModel);
 
-        fb.limit(10).on("child_added", function(data) {
+        fb.on("child_added", function(data) {
             var prayer = data.val();
             if(prayer != null) { 
                 app.onSuccess(prayer.name, prayer.prayer, prayer.date, prayer.type);
@@ -49,7 +49,7 @@ var app = {
 
             var name = $("#name").val();
             var prayer = $("#request").val();
-            var type = $("#type").val();
+            var type = $('input[name=type]:checked', '#prayer_form').val()
             var date = app.getCurrentDate();
 
             fb.push({ "name" : name, "prayer" : prayer, "date" :  date, "type" : type });
@@ -58,8 +58,11 @@ var app = {
 
     onSuccess: function(name, prayer, date, type) {
         var newprayer = new app.CreatePrayer(name, prayer, date, type);
-        viewModel.prayers.push(newprayer);
+        viewModel.prayers.unshift(newprayer);
         app.clearForm();
+        
+        var body = $("html, body");
+        body.animate({scrollTop:0}, '500', 'swing');
     },
 
     CreatePrayer: function(name, prayer, date, type) {
