@@ -29,18 +29,22 @@
     </div>
 
     <div class="row">
-      <div class="small-7 columns">
-          <hr />
-          <div id="prayers" class="row prayer_list" data-bind="foreach: prayers" style="display:none;">
-              <div class="callout panel">
-                  <span data-bind="css: type " data-bind="text: type"></span>
-                  <strong data-bind="text: name"></strong><span style="float: right;" data-bind="text: date"></span>
-                  <hr />
-                  <span data-bind="text: prayer"></span>
+      <div class="small-12 columns top">
+            <div class="testimonial-wrap">
+              <div class="row">
+                <div id="prayers" class="row prayer_list" data-bind="foreach: prayers" style="display:none;">
+                  <div class="large-4 columns testimonial">
+                    <div class="quote">
+                      <p><span data-bind="css: type " data-bind="text: type"></span><span class="prayer" data-bind="text: prayer"></span></p>
+                    </div>
+                    <div class="student">
+                      <p data-bind="text: name"></p>
+                      <p data-bind="text: date"></p>
+                    </div>
+                  </div>
+                </div>
               </div>
-          </div>
-          <hr />
-
+            </div>  
           <h5>How we can be praying for you?</h5>
             <form data-bind="submit: postForm" id="prayer_form" class="custom" data-abide>
               <div class="row">

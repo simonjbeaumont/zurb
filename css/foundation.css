@@ -58,6 +58,57 @@ body {
 .radios label {
   display: inline;
 }
+
+span.prayer {
+  margin-left: 5px;
+}
+
+.top {
+   margin-top: 20px;
+}
+.quote {
+  background: #ebf3f5;
+  padding: 15px 20px 5px 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.quote:after {
+  content: '';
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 20px 18px 0 18px;
+  border-color: #ebf3f5 transparent transparent transparent;
+  position: relative;
+  top: 37px;
+  left: 20px;
+}
+
+.student {
+  margin-left: 25px;
+}
+.student .photo {
+  background-color: #ccc;
+  border-radius: 100px;
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin-right: 13px;
+}
+.student p {
+  position: relative;
+  text-transform: uppercase;
+}
+.student p:nth-child(1) {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.student p:nth-child(2) {
+  font-size: 14px;
+  color: #777;
+}
+
 /*********************** END CUSTOM *********************************/
 
 a:hover {
