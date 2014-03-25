@@ -5,6 +5,16 @@ $(function() {
   app.onDeviceReady();
 });
 
+$(function(){ 
+  $(document)
+    .foundation()
+    .foundation('abide', {
+      patterns: {
+        text_field: /^.{0,1000}$/
+      }
+    }); 
+});
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -17,6 +27,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        app.scrollToForm();
     },
 
     // deviceready Event Handler
@@ -25,9 +36,9 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
     
-        // app.initForm();
         app.CreateViewModel();
         ko.applyBindings(viewModel);
+        $('.prayer_list').show();
 
         fb.on("child_added", function(data) {
             var prayer = data.val();
@@ -35,8 +46,6 @@ var app = {
                 app.onSuccess(prayer.name, prayer.prayer, prayer.date, prayer.type);
             }       
         });
-
-        $('.prayer_list').show();
     },
 
     /********* Constructors ***********/
@@ -53,16 +62,16 @@ var app = {
             var date = app.getCurrentDate();
 
             fb.push({ "name" : name, "prayer" : prayer, "date" :  date, "type" : type });
+
+            var body = $("html, body");
+            body.animate({scrollTop:0}, '500', 'swing');
+            app.clearForm();
         }
     },
 
     onSuccess: function(name, prayer, date, type) {
         var newprayer = new app.CreatePrayer(name, prayer, date, type);
         viewModel.prayers.unshift(newprayer);
-        app.clearForm();
-        
-        var body = $("html, body");
-        body.animate({scrollTop:0}, '500', 'swing');
     },
 
     CreatePrayer: function(name, prayer, date, type) {
@@ -90,6 +99,13 @@ var app = {
 
         $('#prayer_form').each(function(){
             this.reset();
+        });
+    },
+
+    scrollToForm: function() {
+        $("#form_link").click(function() {
+            $('html, body').animate({
+        scrollTop: $("#prayer_form").offset().top}, 2000);
         });
     }
 };

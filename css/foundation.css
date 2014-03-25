@@ -39,7 +39,7 @@ body {
   font-size: 100%; }
 
 body {
-  background: white;
+  background: #FAFCFF;
   color: #222222;
   padding: 0;
   margin: 0;
@@ -61,6 +61,10 @@ body {
 
 span.prayer {
   margin-left: 5px;
+}
+
+.body {
+  background: white;
 }
 
 .top {
@@ -107,6 +111,10 @@ span.prayer {
 .student p:nth-child(2) {
   font-size: 14px;
   color: #777;
+}
+
+#prayers {
+  margin-left: 10px;
 }
 
 /*********************** END CUSTOM *********************************/
@@ -1969,7 +1977,7 @@ button, .button {
   border-color: #d8d8d8;
   margin-bottom: 1.25rem;
   padding: 1.25rem;
-  background: #f2f2f2; }
+  background: #FAFCFF; }
   .panel > :first-child {
     margin-top: 0; }
   .panel > :last-child {
