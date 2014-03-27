@@ -5,16 +5,6 @@ $(function() {
   app.onDeviceReady();
 });
 
-$(function(){ 
-  $(document)
-    .foundation()
-    .foundation('abide', {
-      patterns: {
-        text_field: /^.{0,1000}$/
-      }
-    }); 
-});
-
 var app = {
     // Application Constructor
     initialize: function() {
@@ -44,7 +34,7 @@ var app = {
             var prayer = data.val();
             if(prayer != null) { 
                 app.onSuccess(prayer.name, prayer.prayer, prayer.date, prayer.type);
-            }       
+            }     
         });
     },
 
