@@ -36,11 +36,13 @@ html, body {
 
 html,
 body {
-  font-size: 100%; }
+  font-size: 100%;
+ }
 
 body {
   background: #FAFCFF;
-  color: #222222;
+  background-image: url("../img/background.jpg");
+  color: white;
   padding: 0;
   margin: 0;
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
@@ -70,17 +72,22 @@ span.prayer {
   text-align: center;
 }
 .body {
-  background: white;
+  background: rgba(25, 25, 25, 0);
 }
 
 .top {
    margin-top: 20px;
 }
 .quote {
-  background: #ebf3f5;
   padding: 15px 20px 5px 15px;
   border-radius: 5px;
   margin-bottom: 15px;
+  margin-right: 20px;
+  border-style:solid;
+  border-width:1px;
+  border-color: white;
+  opacity: 0.8;
+  color: white;
 }
 .quote:after {
   content: '';
@@ -90,7 +97,7 @@ span.prayer {
   border-width: 20px 18px 0 18px;
   border-color: #ebf3f5 transparent transparent transparent;
   position: relative;
-  top: 37px;
+  top: 42px;
   left: 20px;
 }
 
